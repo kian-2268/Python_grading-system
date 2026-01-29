@@ -1,0 +1,8 @@
+1. Explain the overall design of your program and justify why you chose this particular class structure and set of user-defined methods.
+- The program ask for the students name, year, and grade. The system will stop asking for the grades after entering 3 grades. The value error and the zero division error will catch all the unexpected input by the user. The class students will encapsulate the important data such as name, grade, and year level. The code was structured for readability and reusability and the class handles validation and calculations.
+
+2. Describe how user input is handled in your program and discuss the role of exception handling (try–except) in preventing incorrect or unexpected behavior.
+- The user input was handled by using input function and was then converted to the required data type. The program uses value error and zero division error to block and catch the unexpected and invalid user inputs, such as grades outside the range and calculating grades when there's no grades input.
+
+3. Identify one limitation of your current implementation and explain how it could be improved using additional OOP concepts or better error handling.
+- The limitation of this code is that it only support a single student input. This could be improved by introducing more OOP concepts class to manage multiple students objects. 
