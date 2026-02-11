@@ -1,73 +1,44 @@
-class Book:
-    def __init__(self, title, author, pub_year):
-        self.title = title
-        self.author = author
-        self.pub_year = pub_year
-        self.isAvailable = True
+class student:
+    def __init__(self,year, name):
+        self.name = name
+        self.year = year
+        self.grade = []
 
-    def is_Available(self):
-        return self.isAvailable
-    
-    def borrow_book(self):
-        if self.isAvailable:
-            self.isAvailable = False
-            print("Successfully borrowed a book!")
-        else:
-            print("Error! This book is already borrowed.")
+    def addGrade(self, grade):
+        if grade < 1 or grade > 4:
+            raise ValueError("Grade must be within 1 and 4.")
+        self.grade.append(grade)
 
-    def return_book(self):
-        if not self.isAvailable:
-            self.isAvailable = True
-            print("Book was successfully returned!")
-        else:
-            print("Error! Book is already available.")
+    def calculate_grade(self):
+        if not self.grade:
+            raise ZeroDivisionError("No Available grades that can be calculated.")
+        return sum (self.grade)/ len(self.grade)
 
-    def display_info(self):
-        status = "Available" if self.isAvailable else "Unavailable"
-
-        print("\nBook Information")
-        print("Title: ", self.title)
-        print("Author: ", self.author)
-        print("Publication Year: ", self.pub_year)
-        print("Status: ", status)
-
-def Main():
+def main():
     try:
-        title = input("Enter the title of the book: ")
-        author = input("Enter the name of the author: ")
+        name = input("Enter student name: ")
+        year = input("Enter student year level: ")
+
+        students = student(year, name)
 
         while True:
             try:
-                year = input("Enter the publication year: ")
-                break
-            except ValueError:
-                print("Error: Please enter a valid(numbers only).")
+                grade = float(input("Enter your grades: "))
+                if grade == 3:
+                    break
+                students.addGrade(grade)
+            except ValueError as e:
+                print("Invalid output", e)
 
-        book = Book(title, author, year)
+        average = students.calculate_grade()
+        print(f"\nStudent Name: {students.name}")
+        print(f"Student Year: {students.year}")
+        print(f"Average Grade: {average:.2f}")
 
-        while True:
-            print("\nChoose an action: ")
-            print("[1] Borrow book")
-            print("[2] Return book")
-            print("[3] Display book information")
-            print("[4] Exit")
-
-            Choice = input("Enter your choice(1-4): ")
-
-            if Choice == "1":
-                book.borrow_book()
-            elif Choice == "2":
-                book.return_book()
-            elif Choice == "3":
-                book.display_info()
-            elif Choice == "4":
-                print("Exiting program. Thank you for using us!")
-                break
-            else:
-                print("Error. Invalid choice. Please only select from 1 to 4.")
-
-    except Exception as e:
+    except ZeroDivisionError as e:
         print("Error: ", e)
+    except Exception as e:
+        print("Unexpected error: ", e)
 
 if __name__ == "__main__":
-    Main()
+    main()
